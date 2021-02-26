@@ -1,11 +1,12 @@
 package com.sample.firstrestapp.filtering;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
+@JsonFilter("SampleFilter") // for dynamic filtering
 public class Sample {
 
     private String value1;
-    @JsonIgnore
+    //@JsonIgnore
     private String value2;
     private String value3;
 
