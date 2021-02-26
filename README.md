@@ -21,6 +21,7 @@ Project for spring boot api development learning
   - Request parameter versioning (amz)
   - Header versioning (MS)
   - Media/Mime type versioning (Accept/Produces) (GT)
+- Basic authentication security
 
 
 ### Versioning FActors -- looks request param versioning is good for caching and api documentation -- No perfect solution
