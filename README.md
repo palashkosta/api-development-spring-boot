@@ -17,4 +17,14 @@ Project for spring boot api development learning
 - Filtering (filtering out the attributes and not the rows) - static (@JsonIgnore)
 - Filtering - dynamic (through code)
 - **Versioning** - Different URI OR Different Request Params OR Different Headers
-- 
+  - URI versioning (twt)
+  - Request parameter versioning (amz)
+  - Header versioning (MS)
+  - Media/Mime type versioning (Accept/Produces) (GT)
+
+
+### Versioning FActors -- looks request param versioning is good for caching and api documentation -- No perfect solution
+- URI pollution
+- Http headers misuse
+- Caching
+- API documentation
