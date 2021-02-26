@@ -28,3 +28,4 @@ Project for spring boot api development learning
 - Http headers misuse
 - Caching
 - API documentation
+- Need to check how API Gateway and Lambda works???
