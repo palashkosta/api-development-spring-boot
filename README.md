@@ -2,7 +2,7 @@
 Project for spring boot api development learning
 
 ## Important links
-- Spring boot initializer - 
+- Spring boot initializer - https://start.spring.io/
 
 ## Topics Covered
 ### Spring Boot Rest App
