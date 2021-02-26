@@ -16,3 +16,5 @@ Project for spring boot api development learning
 - API monitoring with actuators and HAL browser (link)
 - Filtering (filtering out the attributes and not the rows) - static (@JsonIgnore)
 - Filtering - dynamic (through code)
+- **Versioning** - Different URI OR Different Request Params OR Different Headers
+- 
