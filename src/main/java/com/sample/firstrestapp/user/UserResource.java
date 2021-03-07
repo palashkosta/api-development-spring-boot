@@ -5,6 +5,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -26,9 +27,34 @@ public class UserResource {
     @Autowired
     private UserDaoService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/users")
     public List<User> retrieveAllUsers() {
         return userService.findAll();
+    }
+
+    @GetMapping("/jpa/users")
+    public List<User> retrieveAllJpaUsers() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/jpa/users/{id}")
+    public EntityModel<User> retrieveJpaUser(@PathVariable int id) {
+        Optional<User> singleUser = userRepository.findById(id);
+        if (!singleUser.isPresent()) {
+            throw new UserNotFoundException("of id -" + id);
+        }
+
+        EntityModel<User> resource = EntityModel.of(singleUser.get());
+		
+		WebMvcLinkBuilder linkTo = 
+				linkTo(methodOn(this.getClass()).retrieveAllUsers());
+		
+		resource.add(linkTo.withRel("all-users"));
+
+        return resource;
     }
 
     @GetMapping("/users/{id}")
@@ -56,6 +82,11 @@ public class UserResource {
         }
     }
 
+    @DeleteMapping("/jpa/users/{id}")
+    public void deleteJpaUserById(@PathVariable int id) {
+        userRepository.deleteById(id);
+    }
+
     // status - CREATED
     // input - Details of user
     // output - Return the created URL
@@ -68,4 +99,27 @@ public class UserResource {
 
         return ResponseEntity.created(location).build();
     }
+
+    @PostMapping("/jpa/users")
+    public ResponseEntity<Object> createJpaUser(@Valid @RequestBody User user) {
+        User savedUser = userRepository.save(user);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+
+    @GetMapping("/jpa/users/{id}/posts")
+    public List<Post> retrieveAllUsersPosts(@PathVariable int id) {
+        Optional<User> userOptional =  userRepository.findById(id);
+
+        if (!userOptional.isPresent()) {
+            throw new UserNotFoundException("id-"+id);
+        }
+
+        return userOptional.get().getPosts();
+    }
+    
 }
