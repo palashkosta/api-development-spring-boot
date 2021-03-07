@@ -22,6 +22,12 @@ Project for spring boot api development learning
   - Header versioning (MS)
   - Media/Mime type versioning (Accept/Produces) (GT)
 - Basic authentication security
+- JPA (Java Persistence API)
+  - It defines handling database as the entities/object. (like Realm and Room)
+  - JPA is an interface and Hibernate is most popular implementation of JPA
+
+- H2 - In memory database
+  - In memory database gets cleared up on server restart
 
 
 ### Versioning FActors -- looks request param versioning is good for caching and api documentation -- No perfect solution
